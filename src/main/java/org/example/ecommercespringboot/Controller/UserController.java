@@ -1,5 +1,7 @@
 package org.example.ecommercespringboot.Controller;
 
+import org.example.ecommercespringboot.DTO.UserDTO.UserRequest;
+import org.example.ecommercespringboot.DTO.UserDTO.UserResponse;
 import org.example.ecommercespringboot.Models.User;
 import org.example.ecommercespringboot.Service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,11 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(
-            @RequestBody User user) {
+    public ResponseEntity<UserResponse> createUser(
+            @RequestBody UserRequest request) {
+
         return ResponseEntity.ok(
-                userService.createUser(user));
+                userService.createUser(request));
     }
 
     @GetMapping("/{id}")
@@ -33,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(
                 userService.getAllUsers());
     }

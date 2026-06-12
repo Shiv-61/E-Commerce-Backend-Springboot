@@ -24,4 +24,9 @@ public class User {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
+
+    public void setName(String name) {
+        this.username = name;
+    }
+
 }

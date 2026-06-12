@@ -1,5 +1,7 @@
 package org.example.ecommercespringboot.Service.Impl;
 
+import org.example.ecommercespringboot.DTO.UserDTO.UserRequest;
+import org.example.ecommercespringboot.DTO.UserDTO.UserResponse;
 import org.example.ecommercespringboot.Models.User;
 import org.example.ecommercespringboot.Repository.UserRepository;
 import org.example.ecommercespringboot.Service.UserService;
@@ -18,10 +20,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
+    public UserResponse createUser(UserRequest request) {
 
+        User user = new User();
+
+        user.setName(request.getName());
+        user.setPassword(request.getPassword());
+
+        User savedUser = userRepository.save(user);
+
+        return new UserResponse(
+                savedUser.getId(),
+                savedUser.getUsername()
+        );
+    }
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id)
@@ -30,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+        return userRepository.findAll().stream().map(user -> new UserResponse(user.getId(),user.getUsername())).toList();
     }
 
     @Override
