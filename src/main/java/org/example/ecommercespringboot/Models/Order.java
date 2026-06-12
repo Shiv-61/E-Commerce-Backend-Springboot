@@ -3,31 +3,24 @@ package org.example.ecommercespringboot.Models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.ecommercespringboot.DTO.ProductDTO.ProductResponse;
+import org.example.ecommercespringboot.DTO.UserDTO.UserResponse;
 
 import java.time.LocalDateTime;
 
 // these lombok annotation add the getter and setter automatically we don't  need to make the methods
+@Table(name = "orders")
 @Getter
 @Setter
-@Entity
-@Table(name = "orders")
-public class Order{
+public class Order {
+
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "username")
-    private String username;
+    private Long userId;
 
-    @Column(name = "orderDate")
     private LocalDateTime orderDate;
 
-    @Column(name = "password")
-    private String password;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // user_id is the foreign key that is the order owns the relationship
-    private User user;
-
-    // class containing @JoinColumn owns the relationship
+    private UserResponse userResponse;
 }

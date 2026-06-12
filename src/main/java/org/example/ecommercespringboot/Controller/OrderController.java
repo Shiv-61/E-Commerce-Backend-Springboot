@@ -1,5 +1,7 @@
 package org.example.ecommercespringboot.Controller;
 
+import org.example.ecommercespringboot.DTO.OrderDTO.OrderRequest;
+import org.example.ecommercespringboot.DTO.OrderDTO.OrderResponse;
 import org.example.ecommercespringboot.Models.Order;
 import org.example.ecommercespringboot.Service.OrderService;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +19,15 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrder(){
+    public ResponseEntity<List<OrderResponse>> getAllOrder(){
         return ResponseEntity.ok(orderService.getAllOrders());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrder(@PathVariable Long id){
+    public ResponseEntity<OrderResponse> getOrder(@PathVariable Long id){
         return ResponseEntity.ok(orderService.getOrder(id));
     }
     @PostMapping()
-    public ResponseEntity<Order> createOrder(@RequestBody Order order){
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest order){
         return ResponseEntity.ok(orderService.createOrder(order));
     }
 }

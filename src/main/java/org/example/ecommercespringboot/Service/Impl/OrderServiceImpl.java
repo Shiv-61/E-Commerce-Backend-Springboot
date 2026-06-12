@@ -1,8 +1,10 @@
 package org.example.ecommercespringboot.Service.Impl;
+import org.example.ecommercespringboot.DTO.OrderDTO.OrderRequest;
+import org.example.ecommercespringboot.DTO.OrderDTO.OrderResponse;
+import org.example.ecommercespringboot.Mapper.OrderMapper;
 import org.example.ecommercespringboot.Models.Order;
 import org.example.ecommercespringboot.Repository.OrderRepository;
 import org.example.ecommercespringboot.Service.OrderService;
-import org.hibernate.annotations.DialectOverride;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,30 +19,52 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Order order) {
-        return orderRepository.save(order);
+    public OrderResponse createOrder(
+            OrderRequest request) {
+
+        Order order = new Order();
+
+        order.setUserId(request.getUserId());
+        order.setOrderDate(request.getOrderDate());
+
+        Order savedOrder =
+                orderRepository.save(order);
+
+        return OrderMapper.toResponse(
+                savedOrder);
+    }
+    @Override
+    public List<OrderResponse> getAllOrders() {
+
+        return orderRepository.findAll()
+                .stream()
+                .map(OrderMapper::toResponse)
+                .toList();
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
+    public OrderResponse getOrder(Long id){
 
-    @Override
-    public  Order getOrder(Long id){
-        return orderRepository.findById(id).orElseThrow(()-> new RuntimeException("Order not Found"));
-    }
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Order not Found"));
 
+        return OrderMapper.toResponse(order);
+    }
     @Override
-    public Order updateOrder(Long id, Order updatedOrder) {
+    public OrderResponse updateOrder(Long id, OrderRequest updatedOrder) {
 
         Order existingOrder = orderRepository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Order not found with id: " + id));
         existingOrder.setOrderDate(updatedOrder.getOrderDate());
-        existingOrder.setUser(updatedOrder.getUser());
+        existingOrder.setUserId(updatedOrder.getUserId());
+        existingOrder.setOrderDate(
+                updatedOrder.getOrderDate());
 
-        return orderRepository.save(existingOrder);
+        Order editedOrder =  orderRepository.save(existingOrder);
+        return OrderMapper.toResponse(editedOrder);
     }
 
     @Override
