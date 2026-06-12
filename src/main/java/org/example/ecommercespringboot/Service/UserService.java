@@ -1,6 +1,7 @@
 package org.example.ecommercespringboot.Service;
 import org.example.ecommercespringboot.Models.User;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User createUser(User user);
@@ -9,4 +10,6 @@ public interface UserService {
     List<User> getAllUsers();
     User updateUser(Long id, User user);
     void delteUser(Long id);
+
+    Optional<User> getUser(Long id);
 }
