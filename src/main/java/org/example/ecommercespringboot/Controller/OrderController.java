@@ -24,5 +24,8 @@ public class OrderController {
     public ResponseEntity<Order> getOrder(@PathVariable Long id){
         return ResponseEntity.ok(orderService.getOrder(id));
     }
-
+    @PostMapping()
+    public ResponseEntity<Order> createOrder(@RequestBody Order order){
+        return ResponseEntity.ok(orderService.createOrder(order));
+    }
 }
