@@ -27,7 +27,6 @@ public class UserController {
         return ResponseEntity.ok(
                 userService.createUser(request));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getUser(
             @PathVariable Long id) {
