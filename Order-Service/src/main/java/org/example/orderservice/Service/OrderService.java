@@ -2,7 +2,6 @@ package org.example.ecommercespringboot.Service;
 
 import org.example.ecommercespringboot.DTO.OrderDTO.OrderRequest;
 import org.example.ecommercespringboot.DTO.OrderDTO.OrderResponse;
-import org.example.ecommercespringboot.Models.Order;
 
 import java.util.List;
 public interface OrderService {

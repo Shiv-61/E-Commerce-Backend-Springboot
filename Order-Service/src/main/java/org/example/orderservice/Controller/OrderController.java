@@ -2,7 +2,6 @@ package org.example.ecommercespringboot.Controller;
 
 import org.example.ecommercespringboot.DTO.OrderDTO.OrderRequest;
 import org.example.ecommercespringboot.DTO.OrderDTO.OrderResponse;
-import org.example.ecommercespringboot.Models.Order;
 import org.example.ecommercespringboot.Service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
