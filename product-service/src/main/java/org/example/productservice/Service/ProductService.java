@@ -2,10 +2,8 @@ package org.example.ecommercespringboot.Service;
 
 import org.example.ecommercespringboot.DTO.ProductDTO.ProductRequest;
 import org.example.ecommercespringboot.DTO.ProductDTO.ProductResponse;
-import org.example.ecommercespringboot.Models.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
     ProductResponse createProduct(ProductRequest request);

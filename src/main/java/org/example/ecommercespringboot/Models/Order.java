@@ -3,7 +3,6 @@ package org.example.ecommercespringboot.Models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.ecommercespringboot.DTO.ProductDTO.ProductResponse;
 import org.example.ecommercespringboot.DTO.UserDTO.UserResponse;
 
 import java.time.LocalDateTime;
